@@ -40,6 +40,8 @@ import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 	reflectionv1 "cosmossdk.io/api/cosmos/reflection/v1"
 
+	keysharemodulekeeper "fairyring/x/keyshare/keeper"
+
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -472,6 +474,9 @@ func NewWasmApp(
 		Example of setting gov params:
 		govConfig.MaxMetadataLen = 10000
 	*/
+	scopedGovkeeper := app.CapabilityKeeper.ScopeToModule(govtypes.ModuleName)
+	var keyshareKeeper keysharemodulekeeper.Keeper
+
 	govKeeper := govkeeper.NewKeeper(
 		appCodec,
 		keys[govtypes.StoreKey],
@@ -481,6 +486,11 @@ func NewWasmApp(
 		app.MsgServiceRouter(),
 		govConfig,
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
+		app.IBCKeeper.ChannelKeeper,
+		&app.IBCKeeper.PortKeeper,
+		scopedGovkeeper,
+		app.IBCKeeper.ConnectionKeeper,
+		keyshareKeeper,
 	)
 
 	app.GovKeeper = *govKeeper.SetHooks(

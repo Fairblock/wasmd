@@ -26,6 +26,8 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
+	keysharemodulekeeper "fairyring/x/keyshare/keeper"
+
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/std"
@@ -450,6 +452,9 @@ func createTestInput(
 	// add wasm handler so we can loop-back (contracts calling contracts)
 	contractKeeper := NewDefaultPermissionKeeper(&keeper)
 
+	scopedGovkeeper := capabilityKeeper.ScopeToModule(govtypes.ModuleName)
+	var keyshareKeeper keysharemodulekeeper.Keeper
+
 	govKeeper := govkeeper.NewKeeper(
 		appCodec,
 		keys[govtypes.StoreKey],
@@ -459,6 +464,11 @@ func createTestInput(
 		msgRouter,
 		govtypes.DefaultConfig(),
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
+		ibcKeeper.ChannelKeeper,
+		&ibcKeeper.PortKeeper,
+		scopedGovkeeper,
+		ibcKeeper.ConnectionKeeper,
+		keyshareKeeper,
 	)
 	require.NoError(tb, govKeeper.SetParams(ctx, govv1.DefaultParams()))
 	govKeeper.SetProposalID(ctx, 1)
