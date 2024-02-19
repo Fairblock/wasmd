@@ -40,7 +40,7 @@ import (
 	autocliv1 "cosmossdk.io/api/cosmos/autocli/v1"
 	reflectionv1 "cosmossdk.io/api/cosmos/reflection/v1"
 
-	keysharemodulekeeper "fairyring/x/keyshare/keeper"
+	keysharemodulekeeper "github.com/Fairblock/fairyring/x/keyshare/keeper"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/client"

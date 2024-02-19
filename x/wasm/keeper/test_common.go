@@ -26,7 +26,7 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
-	keysharemodulekeeper "fairyring/x/keyshare/keeper"
+	keysharemodulekeeper "github.com/Fairblock/fairyring/x/keyshare/keeper"
 
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/codec"
