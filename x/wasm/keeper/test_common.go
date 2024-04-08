@@ -26,8 +26,6 @@ import (
 
 	errorsmod "cosmossdk.io/errors"
 
-	keysharemodulekeeper "github.com/Fairblock/fairyring/x/keyshare/keeper"
-
 	"github.com/cosmos/cosmos-sdk/baseapp"
 	"github.com/cosmos/cosmos-sdk/codec"
 	"github.com/cosmos/cosmos-sdk/std"
@@ -453,7 +451,6 @@ func createTestInput(
 	contractKeeper := NewDefaultPermissionKeeper(&keeper)
 
 	scopedGovkeeper := capabilityKeeper.ScopeToModule(govtypes.ModuleName)
-	var keyshareKeeper keysharemodulekeeper.Keeper
 
 	govKeeper := govkeeper.NewKeeper(
 		appCodec,
@@ -468,7 +465,6 @@ func createTestInput(
 		&ibcKeeper.PortKeeper,
 		scopedGovkeeper,
 		ibcKeeper.ConnectionKeeper,
-		keyshareKeeper,
 	)
 	require.NoError(tb, govKeeper.SetParams(ctx, govv1.DefaultParams()))
 	govKeeper.SetProposalID(ctx, 1)
