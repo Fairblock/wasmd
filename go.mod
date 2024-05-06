@@ -39,7 +39,7 @@ require (
 	cosmossdk.io/errors v1.0.0
 	cosmossdk.io/math v1.1.2
 	cosmossdk.io/tools/rosetta v0.2.1
-	github.com/Fairblock/fairyring v0.4.0
+	github.com/Fairblock/fairyring v0.6.0
 	github.com/cometbft/cometbft v0.37.2
 	github.com/cometbft/cometbft-db v0.8.0
 	github.com/spf13/viper v1.16.0
@@ -192,8 +192,7 @@ require (
 
 replace (
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
-	github.com/Fairblock/fairyring => ../fairyring
-	github.com/cosmos/cosmos-sdk => ../cosmos-sdk
+	github.com/cosmos/cosmos-sdk => github.com/Fairblock/cosmos-sdk v0.47.4-fairyring
 
 	// github.com/cosmos/cosmos-sdk => github.com/Fairblock/cosmos-sdk v0.47.3-fairyring
 	// dgrijalva/jwt-go is deprecated and doesn't receive security updates.
