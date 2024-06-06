@@ -416,6 +416,10 @@ func createTestInput(
 		msgRouter,
 		govtypes.DefaultConfig(),
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
+		ibcKeeper.ChannelKeeper,
+		ibcKeeper.PortKeeper,
+		scopedWasmKeeper,
+		ibcKeeper.ConnectionKeeper,
 	)
 	require.NoError(t, govKeeper.Params.Set(ctx, govv1.DefaultParams()))
 

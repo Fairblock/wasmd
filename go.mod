@@ -211,6 +211,11 @@ require (
 )
 
 replace (
+	github.com/cosmos/cosmos-sdk => ../cosmos-cosmos-sdk
+	github.com/gogo/protobuf => github.com/regen-network/protobuf v1.3.3-alpha.regen.1
+	github.com/Fairblock/fairyring => ../fairyring
+	// github.com/confio/ics23/go => github.com/cosmos/cosmos-sdk/ics23/go v0.8.0
+
 	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 	// dgrijalva/jwt-go is deprecated and doesn't receive security updates.
 	// See: https://github.com/cosmos/cosmos-sdk/issues/13134
