@@ -406,6 +406,15 @@ func createTestInput(
 	// add wasm handler so we can loop-back (contracts calling contracts)
 	contractKeeper := NewDefaultPermissionKeeper(&keeper)
 
+	// GetIBCKeeper returns the IBC keeper.
+	GetIBCKeeper := func() *ibckeeper.Keeper {
+		return ibcKeeper
+	}
+
+	GetCapabilityScopedKeeper := func(moduleName string) capabilitykeeper.ScopedKeeper {
+		return scopedWasmKeeper
+	}
+
 	govKeeper := govkeeper.NewKeeper(
 		appCodec,
 		runtime.NewKVStoreService(keys[govtypes.StoreKey]),
@@ -416,10 +425,8 @@ func createTestInput(
 		msgRouter,
 		govtypes.DefaultConfig(),
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
-		ibcKeeper.ChannelKeeper,
-		ibcKeeper.PortKeeper,
-		scopedWasmKeeper,
-		ibcKeeper.ConnectionKeeper,
+		GetIBCKeeper,
+		GetCapabilityScopedKeeper,
 	)
 	require.NoError(t, govKeeper.Params.Set(ctx, govv1.DefaultParams()))
 
