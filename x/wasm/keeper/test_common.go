@@ -411,6 +411,10 @@ func createTestInput(
 		return ibcKeeper
 	}
 
+	GetCapabilityScopedKeeper := func(modName string) capabilitykeeper.ScopedKeeper {
+		return capabilityKeeper.ScopeToModule(modName)
+	}
+
 	//GetCapabilityScopedKeeper := func(moduleName string) capabilitykeeper.ScopedKeeper {
 	//	return scopedWasmKeeper
 	//}
@@ -426,7 +430,7 @@ func createTestInput(
 		govtypes.DefaultConfig(),
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
 		GetIBCKeeper,
-		scopedWasmKeeper,
+		GetCapabilityScopedKeeper,
 	)
 	require.NoError(t, govKeeper.Params.Set(ctx, govv1.DefaultParams()))
 

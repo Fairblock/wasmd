@@ -372,6 +372,7 @@ func NewWasmApp(
 	scopedICAControllerKeeper := app.CapabilityKeeper.ScopeToModule(icacontrollertypes.SubModuleName)
 	scopedTransferKeeper := app.CapabilityKeeper.ScopeToModule(ibctransfertypes.ModuleName)
 	scopedWasmKeeper := app.CapabilityKeeper.ScopeToModule(wasmtypes.ModuleName)
+	app.CapabilityKeeper.ScopeToModule(govtypes.ModuleName)
 	app.CapabilityKeeper.Seal()
 
 	// add keepers
@@ -542,6 +543,8 @@ func NewWasmApp(
 		app.MsgServiceRouter(),
 		govConfig,
 		authtypes.NewModuleAddress(govtypes.ModuleName).String(),
+		app.GetIBCKeeper,
+		app.GetCapabilityScopedKeeper,
 	)
 
 	// Set legacy router for backwards compatibility with gov v1beta1

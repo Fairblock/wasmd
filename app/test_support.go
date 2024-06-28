@@ -16,6 +16,11 @@ func (app *WasmApp) GetIBCKeeper() *ibckeeper.Keeper {
 	return app.IBCKeeper
 }
 
+// GetCapabilityScopedKeeper returns the capability scoped keeper.
+func (app *WasmApp) GetCapabilityScopedKeeper(moduleName string) capabilitykeeper.ScopedKeeper {
+	return app.CapabilityKeeper.ScopeToModule(moduleName)
+}
+
 func (app *WasmApp) GetScopedIBCKeeper() capabilitykeeper.ScopedKeeper {
 	return app.ScopedIBCKeeper
 }
