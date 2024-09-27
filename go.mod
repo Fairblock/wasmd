@@ -1,6 +1,6 @@
 module github.com/CosmWasm/wasmd
 
-go 1.21.5
+go 1.22
 
 toolchain go1.22.4
 
@@ -220,10 +220,10 @@ require (
 
 replace (
 	cosmossdk.io/api => github.com/Fairblock/cosmossdk-api v0.7.5
+
+	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 	github.com/Fairblock/fairyring => github.com/Fairblock/fairyring v0.7.0
 	github.com/cosmos/cosmos-sdk => github.com/Fairblock/cosmos-sdk v0.50.6-fairyring
-	
-	github.com/99designs/keyring => github.com/cosmos/keyring v1.2.0
 	// dgrijalva/jwt-go is deprecated and doesn't receive security updates.
 	// See: https://github.com/cosmos/cosmos-sdk/issues/13134
 	github.com/dgrijalva/jwt-go => github.com/golang-jwt/jwt/v4 v4.4.2
